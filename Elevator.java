@@ -13,8 +13,10 @@ public class Elevator {
     private final int capacity;
     private final int maxFloor; 
     private Person[] occupants; 
-    private FloorQueue[] floorArray;
-  
+    //private FloorQueue[] floorArray;
+            //This might be better to give this responsibility to a 
+            //controling class to make the whole system more modular
+            
     
     /**
      * Creates new Elevator with specified capacity starting at floor 0
@@ -26,14 +28,14 @@ public class Elevator {
     public Elevator(int cap,int floorCount) throws InvalidCapacityException{
         if(cap <= 0)
             throw new InvalidCapacityException();
-        if(floorCount <=0)
+        if(floorCount <=1)
             throw new InvalidCapacityException();
         capacity = cap;
         currentFloor = 0;
         maxFloor = floorCount;
         
         occupants = new Person[capacity];
-        floorArray = new FloorQueue[maxFloor];
+        //floorArray = new FloorQueue[maxFloor];
     }
     
     /**
@@ -93,13 +95,22 @@ public class Elevator {
         return count;
     }
     
-    //TODO Implement
-//    private void addPerson(Person p){
-//        for(int i = 0; i< capacity; i++){
-//            if(p.compareTo(occupants[i] => 0))
-//                
-//        }
-//    }
+    //Please take a look at this. What do you think its supposed to be an insertion sort style 
+    // I think it should work fine but would like to see what some one else thinks.
+    private void addPerson(Person p){
+        if(isFull()){
+            //throw error
+        }
+            
+        for(int i = 0; i< capacity; i++){
+            if(p.compareTo(occupants[i]) >=0 ){
+                for(int j = capacity; j>i; j--){
+                    occupants[j] = occupants[j-1];
+                }
+                occupants[i] = p;
+            }
+        }
+   }
     
     //TODO Implement
     public int letOut(int floor){
@@ -113,14 +124,18 @@ public class Elevator {
         return count;
     }
     
-    //To Be Implemented
+
     public boolean isFull(){
-        return false;
+        for(int i = 0; i < capacity; i++)
+            if(occupants[i] == null)
+                return false;
+        
+        return true;
     }
     
-    //To Be Implemented
+
     public boolean isEmpty(){
-        return false;
+        return occupants[1] == null;
     }
     
 }

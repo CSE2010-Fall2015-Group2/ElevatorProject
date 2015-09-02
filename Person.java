@@ -18,15 +18,25 @@ package ElevatorProject;
  * 
  * @author Group 1 - Nicholas Persing, Christopher Millsap, JulioVillazon
  */
+
+//Can each of these report their own statistics to a file?
+
 public class Person implements Comparable{
     private int floor;
+    private int inTick;
 
     /**
      * Creates a Person 
      * @param floor the destination floor for the Person 
+     * @param inTick 
+     * @throws ElevatorProject.InvalidLocationException 
      */
-    public Person(int floor){
+    public Person(int floor, int inTick) throws InvalidLocationException{
+        if(floor <=0)
+            throw new InvalidLocationException();
+
         this.floor=floor;
+        this.inTick = inTick; 
     }
 
     /**
