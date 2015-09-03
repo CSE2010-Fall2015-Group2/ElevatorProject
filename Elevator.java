@@ -9,6 +9,7 @@ package ElevatorProject;
  * Edited by: 
  */
 public class Elevator {
+    private Direction direction;
     private int currentFloor;
     private final int capacity;
     private final int maxFloor; 
@@ -38,8 +39,9 @@ public class Elevator {
             throw new InvalidLocationException("Can't create an Elevator with"
                     + "less than 2 floors!");
         capacity = cap;
-        currentFloor = 0;
+        currentFloor = 1;
         maxFloor = floorCount;
+        direction = Direction.UP;
         
         //the +1 is used to provide a null "well" so there will always be a null
         //value just outside the list 
@@ -172,6 +174,14 @@ public class Elevator {
         Person[] temp = new Person[capacity]; 
         System.arraycopy(occupants, 0, temp, 0, capacity);
         return temp;
+    }
+    
+    public void setDirection(Direction d){
+        direction = d;
+    }
+    
+    public Direction getDirection(){
+        return direction;
     }
     
 }

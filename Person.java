@@ -24,6 +24,7 @@ package ElevatorProject;
 public class Person implements Comparable{
     private int floor;
     private int inTick;
+    private int outTick;
 
     /**
      * Creates a Person 
@@ -70,5 +71,13 @@ public class Person implements Comparable{
         if(((Person)o).floor > this.floor)
             return -1;
         return 0;
+    }
+    
+    public void report(){
+        outTick = ElevatorControl.getTick();
+    }
+    
+    public String toString(){
+        return inTick +", " + outTick;
     }
 }

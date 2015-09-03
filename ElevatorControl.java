@@ -18,6 +18,8 @@ public class ElevatorControl {
     private Elevator elevator;
     private static int tick;
     private final int floorCount;
+    private boolean[][] buttonsPressed;
+    Random rand = new Random();
     
     public ElevatorControl(int cap,int floorCount){
         try{
@@ -32,21 +34,24 @@ public class ElevatorControl {
                     + "system out put for more details about the error");
         }
         this.floorCount = floorCount;
+        buttonsPressed = new boolean[floorCount][2];
     }
     
-    public int getTick(){
+    public static int getTick(){
         return tick;
     }
     
     private void getButtonsPressed(){
-        for(int i = 0; i)
+        for(int i = 0; i<floorCount; i++){
+            buttonsPressed[i][0] = floorArray[i].isUpPressed();
+            buttonsPressed[i][1] = floorArray[i].isDownPressed();
+        }
     }
     
-    public void RunSimple(int passengerRate, int duration, int maxPerFloor){
-        Random rand = new Random();
+    //trying this in a seperate method for now
+    public void populateFloors(int passengerRate, int maxPerFloor){
         int temp;
-        for(;tick<duration;tick++){
-            for(int i = 0; i< floorCount; i++) //maybe stick this in it's own method method
+        for(int i = 0; i< floorCount; i++) 
                 for(int j=0; j<maxPerFloor; j++){
                     if(rand.nextInt(100) < passengerRate){
                         temp = rand.nextInt(floorCount);
@@ -60,10 +65,26 @@ public class ElevatorControl {
                         }
                     }    
                 }//This ends populating the floors with new passengers
-                      
-              
+    }
+    
+    public void RunSimple(int passengerRate, int maxPerFloor, int duration){
+        int currentFloor;
+      
+        for(;tick<duration;tick++){
+            populateFloors(passengerRate, maxPerFloor);
+            
+            getButtonsPressed();  
+            currentFloor = elevator.getCurrentFloor();
+            if(currentFloor == 1)
+                elevator.setDirection(Direction.UP);
+            else if(currentFloor == floorCount)
+                elevator.setDirection(Direction.DOWN);
+            elevator.letOut(currentFloor);
             
         }//This is where the tick loop ends
+        
+
+        
         
     }
     
