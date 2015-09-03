@@ -81,6 +81,8 @@ public class ElevatorControl {
                 elevator.setDirection(Direction.DOWN);
             elevator.letOut(currentFloor);
             
+            //elevator.letIn(currentFloor, Direction.UP)
+            
         }//This is where the tick loop ends
         
 

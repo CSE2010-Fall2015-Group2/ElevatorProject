@@ -25,6 +25,23 @@ public class FloorQueue {
         this.floor = floor;
     }
     
+    public boolean isEmpty(Direction d){
+        switch(d){
+            case UP:
+                return upQueue.isEmpty();
+                
+            case DOWN:
+                return downQueue.isEmpty();
+        }
+        return true;
+    }
+    
+    public Person retrieve(Direction d){
+        if(d==Direction.UP)
+            return upQueue.getFirst();
+        return downQueue.getFirst();
+    }
+    
     public boolean isUpPressed(){
         return !upQueue.isEmpty();
     }

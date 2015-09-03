@@ -135,6 +135,7 @@ public class Elevator {
         int count = 0;
         for(int i = 0; i<capacity; i++)
             if(occupants[i].getFloor() == floor){
+                occupants[i].report();
                 removePerson(i);
                 occupancy--;
                 count++;
@@ -144,10 +145,10 @@ public class Elevator {
     }
     
     //TODO Implement
-    public int letIn(int floor, Direction d){            
+    public int letIn(FloorQueue queue){            
         int count = 0;
-        if(!isFull()){
-            //remove from floor queue and add to occupants[]
+        while(!isFull()&&!queue.isEmpty(direction)){
+            addPerson(queue.retrieve(direction));
             occupancy++;
             count++;
         }
