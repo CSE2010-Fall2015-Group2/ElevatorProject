@@ -20,10 +20,20 @@ public class FloorQueue {
         
         if(floor <=0)
             throw new InvalidLocationException(
-                    "Can't create a floor below zero.");
+                    "Creating FloorQueue: can't create a floor below zero.");
         
         this.floor = floor;
     }
+    
+    public boolean isUpPressed(){
+        return !upQueue.isEmpty();
+    }
+    
+    public  boolean isDownPressed(){
+        return !downQueue.isEmpty();
+    }
+    
+    
     
 //    public int EmptyInto(Elevator e, Direction d){
 //        int count = 0;

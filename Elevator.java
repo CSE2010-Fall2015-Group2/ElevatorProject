@@ -13,6 +13,8 @@ public class Elevator {
     private final int capacity;
     private final int maxFloor; 
     private Person[] occupants; 
+    private int occupancy; //the current number of people in the elevator
+    
     //private FloorQueue[] floorArray;
             //This might be better to give this responsibility to a 
             //controling class to make the whole system more modular
@@ -24,17 +26,24 @@ public class Elevator {
      * @param floorCount
      * @throws ElevatorProject.InvalidCapacityException in the case of non-positive
      * or zero entry
+     * @throws ElevatorProject.InvalidLocationException
      */
-    public Elevator(int cap,int floorCount) throws InvalidCapacityException{
+    public Elevator(int cap,int floorCount) 
+            throws InvalidCapacityException, InvalidLocationException{
+        
         if(cap <= 0)
-            throw new InvalidCapacityException();
+            throw new InvalidCapacityException("Can't Create an Elevator with a "
+                    + "zero or negative capacity!");
         if(floorCount <=1)
-            throw new InvalidCapacityException();
+            throw new InvalidLocationException("Can't create an Elevator with"
+                    + "less than 2 floors!");
         capacity = cap;
         currentFloor = 0;
         maxFloor = floorCount;
         
-        occupants = new Person[capacity];
+        //the +1 is used to provide a null "well" so there will always be a null
+        //value just outside the list 
+        occupants = new Person[capacity+1];
         //floorArray = new FloorQueue[maxFloor];
     }
     
@@ -110,32 +119,59 @@ public class Elevator {
                 occupants[i] = p;
             }
         }
-   }
+    }
     
-    //TODO Implement
+    //Removes a person from the list of occupants of the elevator
+    private void removePerson(int index){
+        for(int i = index; i < capacity; i++){
+            occupants[i]=occupants[i+1];
+        }
+    }
+    
+    //lets out all people that are looking to get off at Floor - floor
     public int letOut(int floor){
         int count = 0;
+        for(int i = 0; i<capacity; i++)
+            if(occupants[i].getFloor() == floor){
+                removePerson(i);
+                occupancy--;
+                count++;
+            }
+        
         return count;
     }
     
     //TODO Implement
-    public int letIn(int floor){
+    public int letIn(int floor, Direction d){            
         int count = 0;
+        if(!isFull()){
+            //remove from floor queue and add to occupants[]
+            occupancy++;
+            count++;
+        }
         return count;
     }
     
 
     public boolean isFull(){
-        for(int i = 0; i < capacity; i++)
-            if(occupants[i] == null)
-                return false;
-        
-        return true;
+        return capacity == occupancy;
+//        for(int i = 0; i < capacity; i++)
+//            if(occupants[i] == null)
+//                return false;
+//        
+//        return true;
     }
     
 
     public boolean isEmpty(){
-        return occupants[1] == null;
+        return occupancy == 0; 
+        //return occupants[1] == null;
+    }
+    
+    public Person[] getOccupants(){
+        Person[] temp = new Person[capacity]; 
+        System.arraycopy(occupants, 0, temp, 0, capacity);
+        return temp;
     }
     
 }
