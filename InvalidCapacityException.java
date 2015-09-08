@@ -14,6 +14,12 @@ class InvalidCapacityException extends Exception{
     public InvalidCapacityException() {
         System.out.println("Capacity of Elevator must be a positiove,"
                 + "non zero Integer!");
-    } 
+    }
+    
+    public InvalidCapacityException(String s){
+        System.out.println("Capacity of Elevator must be a positiove,"
+                + "non zero Integer!");
+        System.out.println(s);
+    }
     
 }
