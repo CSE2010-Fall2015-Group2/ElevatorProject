@@ -22,3 +22,5 @@ I'm just starting to look through my code to comment it up and after seeing asse
 In other words, exceptions address the robustness of your application while assertions address its correctness.
 
 Assertions are designed to be cheap to write, you can use them almost everywhere and I'm using this rule of thumb: the more an assertion statement looks stupid, the more valuable it is and the more information it embeds. When debugging a program that does not behave the right way, you will surely check the more obvious failure possibilities based on your experience. Then you will check for problems that just cannot happen: this is exactly when assertions help a lot and save time.
+
+I merged the 9/1 branch back to the master even though it has not been run, tested, and debuged. I did this so its easier for you guys to see it and I will commit my comments here to when done. We can work with the master branch until it works; however once it works ALL changes must be made on a seperate branch!! then after it is confirmed working and we meet together then we can disscus it and merge them.
