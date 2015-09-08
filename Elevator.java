@@ -169,10 +169,14 @@ public class Elevator {
      */
         public int letIn(FloorQueue queue){            
         int count = 0;
-        while(!isFull()&&!queue.isEmpty(direction)){
-            addPerson(queue.retrieve(direction));
-            occupancy++;
-            count++;
+        try{
+            while(!isFull()&&!queue.isEmpty(direction)){
+                addPerson(queue.removePerson(direction));
+                occupancy++;
+                count++;
+            }
+        }catch(EmptyQueueException | InvalidLocationException e){
+            System.out.println("this should nopt happen!");
         }
         return count;
     }
