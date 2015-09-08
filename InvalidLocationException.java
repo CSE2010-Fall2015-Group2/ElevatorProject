@@ -1,14 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Group 2 - Nicholas Persing, Christopher Millsap, Julio Villazon
+ *Elevator Project CSE 2010 - Fall 2015 - Section 1
+ * 
  */
 package ElevatorProject;
 
-/**
- *
- * @author nicholas
- */
 class InvalidLocationException extends Exception{
 
     public InvalidLocationException(){ 

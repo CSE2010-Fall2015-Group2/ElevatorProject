@@ -7,6 +7,15 @@ package ElevatorProject;
  */
 
 public enum Direction {
-    UP, DOWN
+
+    /**
+     * direction up
+     */
+    UP,
+
+    /**
+     * direction down
+     */
+    DOWN
 }
  

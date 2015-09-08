@@ -7,22 +7,19 @@ package ElevatorProject;
 
 import java.util.Random;
 
-/**
- *
- * @author nicholas
- */
+
 public class ElevatorControl {
     private FloorQueue[] floorArray;
     private Elevator elevator;
     private static int tick;
     private final int floorCount;
-    private boolean[][] buttonsPressed;
+    private boolean[][] buttonsPressed;//don't have a use yet, but I think we might need this for future control designs.
     Random rand = new Random();
     
     /**
-     *
-     * @param cap
-     * @param floorCount
+     * Constructor 
+     * @param cap int the capacity of the elevator 
+     * @param floorCount the number of floors in the building 
      */
     public ElevatorControl(int cap,int floorCount){
         try{
@@ -34,7 +31,7 @@ public class ElevatorControl {
             
         }catch(InvalidCapacityException | InvalidLocationException e){
             System.out.println("Could not create elevator! Please see "
-                    + "system out put for more details about the error");
+                    + "system output for more details about the error");
         }
         this.floorCount = floorCount;
         buttonsPressed = new boolean[floorCount][2];
@@ -98,13 +95,17 @@ public class ElevatorControl {
             
             getButtonsPressed();  
             currentFloor = elevator.getCurrentFloor();
+            
+            //if the elevator is at the top or the boptom of the shaft then change directiontion
             if(currentFloor == 1)
                 elevator.setDirection(Direction.UP);
             else if(currentFloor == floorCount)
                 elevator.setDirection(Direction.DOWN);
+            
+            //let out passenger looking to travel to current floor
             elevator.letOut(currentFloor);
             
-            //elevator.letIn(currentFloor, Direction.UP)
+            elevator.letIn(floorArray[currentFloor].retrieve());
             
         }//This is where the tick loop ends
     }

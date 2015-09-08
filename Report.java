@@ -1,7 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Group 2 - Nicholas Persing, Christopher Millsap, Julio Villazon
+ *Elevator Project CSE 2010 - Fall 2015 - Section 1
+ * 
  */
 package ElevatorProject;
 
@@ -10,21 +10,28 @@ import java.nio.file.*;
 import java.io.*;
 import java.util.ArrayDeque;
 
-/**
- *
- * @author nicholas
- */
 public class Report {
     private static final ArrayDeque<Person> bufferQueue = new ArrayDeque<>();
     
+    /**
+     * Default Constructor
+     */
     public Report(){
 
     }
     
+    /**
+     * adds a person to a buffer queue 
+     * @param p Person to be added to report file
+     */
     public static void addToReport(Person p){
         bufferQueue.add(p);
     }
     
+    /**
+     * empties the bufferQueue to a file on disk in the same directory as the 
+     * jar with the TODO title as system time+"Report" upon initialization
+     */
     public static void emptyToFile(){
         //String s = "";
         //byte data[] = s.getBytes();
