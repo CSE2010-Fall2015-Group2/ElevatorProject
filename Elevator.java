@@ -1,12 +1,9 @@
 package ElevatorProject;
 
 /**
- * Group 1 - Nicholas Persing, Christopher Millsap, Julio Villazon
+ * Group 2 - Nicholas Persing, Christopher Millsap, Julio Villazon
  *Elevator Project CSE 2010 - Fall 2015 - Section 1
  * 
- * Created by: Nicholas Persing @ 8/31/2015 11:35
- *      -basic structure, setters and getters
- * Edited by: 
  */
 public class Elevator {
     private Direction direction;
@@ -38,6 +35,8 @@ public class Elevator {
         if(floorCount <=1)
             throw new InvalidLocationException("Can't create an Elevator with"
                     + "less than 2 floors!");
+        
+        
         capacity = cap;
         currentFloor = 1;
         maxFloor = floorCount;
@@ -45,8 +44,6 @@ public class Elevator {
         
         //the +1 is used to provide a null "well" so there will always be a null
         //value just outside the list 
-        occupants = new Person[capacity+1];
-        //floorArray = new FloorQueue[maxFloor];
     }
     
     /**
@@ -67,7 +64,7 @@ public class Elevator {
     
     /**
      * sets the current location
-     * @param floor
+     * @param floor the floor to be set as current.
      * @throws ElevatorProject.InvalidLocationException in the case of non-positive
      * or zero entry
      */
@@ -78,7 +75,7 @@ public class Elevator {
     }
     
     /**
-     * Move up to the next floor
+     * Moves the elevator up to the next floor, increments currentFloor.
      * @throws InvalidLocationException in the case of trying to move above top floor
      */
     public void moveUp() throws InvalidLocationException{
@@ -88,8 +85,8 @@ public class Elevator {
     }
     
     /**
-     * move3 down to the previous floor
-     * @throws InvalidLocationException in the case of trying to move below bottom floor
+     * Moves the elevator down to the previous floor, decrements CurrentFloor.
+     * @throws InvalidLocationException in the case of trying to move below bottom floor.
      */
     public void moveDown() throws InvalidLocationException{
         if(currentFloor == 1)
@@ -98,16 +95,21 @@ public class Elevator {
         currentFloor--;
     }
     
+    /**
+     * Returns the number of current occupants.
+     * @return occupancy
+     */
     public int getCurrentOccupancy(){
-        int count = 0, i = 0;
-        while(occupants[i]!=null){
-            count++;
-        }
-        return count;
+        return occupancy;
     }
-    
-    //Please take a look at this. What do you think its supposed to be an insertion sort style 
-    // I think it should work fine but would like to see what some one else thinks.
+
+    /**
+     * TODO:Please take a look at this. What do you think its supposed to be 
+     * an insertion sort style. I think it should work fine but 
+     * would like to see what some one else thinks.
+     * 
+     * @param p Person to be added to the elevator.
+     */
     private void addPerson(Person p){
         if(isFull()){
             //throw error
@@ -124,14 +126,28 @@ public class Elevator {
     }
     
     //Removes a person from the list of occupants of the elevator
+    /**
+     * Removes the person specified from the elevator 
+     * @param index the index of the person to be removed
+     */
     private void removePerson(int index){
+        //the list is as compacted to as short as possible and this is why 
+        //I made the occupants array 1 longer than the capacity so when the 
+        //list is full we get the null back at the end of the list instead
+        //of a copy of the last person.
         for(int i = index; i < capacity; i++){
             occupants[i]=occupants[i+1];
         }
     }
     
     //lets out all people that are looking to get off at Floor - floor
-    public int letOut(int floor){
+
+    /**
+     * Lets people out of the elevator removing those who are now at their destination floor
+     * @param floor the floor being emptied onto.
+     * @return int - the number of people removed from the elevator.
+     */
+        public int letOut(int floor){
         int count = 0;
         for(int i = 0; i<capacity; i++)
             if(occupants[i].getFloor() == floor){
@@ -144,8 +160,14 @@ public class Elevator {
         return count;
     }
     
-    //TODO Implement
-    public int letIn(FloorQueue queue){            
+            
+    /**
+     * Removes people from the floor queue and adds them to occupants until the queue 
+     * is empty or elevator is full.
+     * @param queue the queue being added to elevator occupants.
+     * @return int - the number of people added to elevator
+     */
+        public int letIn(FloorQueue queue){            
         int count = 0;
         while(!isFull()&&!queue.isEmpty(direction)){
             addPerson(queue.retrieve(direction));
@@ -155,7 +177,10 @@ public class Elevator {
         return count;
     }
     
-
+    /**
+     * Indicates whether the elevator is full or not.
+     * @return boolean - true if full false otherwise.
+     */
     public boolean isFull(){
         return capacity == occupancy;
 //        for(int i = 0; i < capacity; i++)
@@ -165,22 +190,37 @@ public class Elevator {
 //        return true;
     }
     
-
+    /**
+     * Indicates whether the elevator is full or not.
+     * @return boolean - true if empty, flase otherwise
+     */
     public boolean isEmpty(){
         return occupancy == 0; 
         //return occupants[1] == null;
     }
     
+    /**
+     * returns an array of all the occupants 
+     * @return Person[] - a copy of occupants[]
+     */
     public Person[] getOccupants(){
         Person[] temp = new Person[capacity]; 
         System.arraycopy(occupants, 0, temp, 0, capacity);
         return temp;
     }
     
+    /**
+     * sets the direction to desired direction
+     * @param d - the direction to set to
+     */
     public void setDirection(Direction d){
         direction = d;
     }
     
+    /**
+     * Returns the current direction 
+     * @return Direction - the current direction of the elevator
+     */
     public Direction getDirection(){
         return direction;
     }

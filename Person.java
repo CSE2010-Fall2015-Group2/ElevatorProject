@@ -6,17 +6,13 @@ package ElevatorProject;
  */
 
 /**
- * Group 1 - Nicholas Persing, Christopher Millsap, JulioVillazon
+ * Group 2 - Nicholas Persing, Christopher Millsap, JulioVillazon
  *Elevator Project CSE 2010 - Fall 2015 - Section 1
- *
- * Created by: Nicholas Persing @ 8/31/2015 11:29
- *      -Basic structures, setters and getters
- * Edited by:
  */
 
 /**
  * 
- * @author Group 1 - Nicholas Persing, Christopher Millsap, JulioVillazon
+ * @author Group 2 - Nicholas Persing, Christopher Millsap, JulioVillazon
  */
 
 //Can each of these report their own statistics to a file?
@@ -64,6 +60,7 @@ public class Person implements Comparable{
         this.floor=floor;
     }
     
+    
     @Override
     public int compareTo(Object o) {
         if(((Person)o).floor < this.floor)
@@ -73,11 +70,17 @@ public class Person implements Comparable{
         return 0;
     }
     
+    /**
+     * Sends a "this" person to Report.java to be added to bufferQueue 
+     * and eventually added to the output file.
+     */
     public void report(){
         outTick = ElevatorControl.getTick();
+        Report.addToReport(this);
     }
     
+    @Override
     public String toString(){
-        return inTick +", " + outTick;
+        return floor+", "+inTick +", " + outTick;
     }
 }

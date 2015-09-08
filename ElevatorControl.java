@@ -1,13 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Group 2 - Nicholas Persing, Christopher Millsap, Julio Villazon
+ *Elevator Project CSE 2010 - Fall 2015 - Section 1
+ * 
  */
 package ElevatorProject;
 
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -21,6 +19,11 @@ public class ElevatorControl {
     private boolean[][] buttonsPressed;
     Random rand = new Random();
     
+    /**
+     *
+     * @param cap
+     * @param floorCount
+     */
     public ElevatorControl(int cap,int floorCount){
         try{
             elevator = new Elevator(cap, floorCount);
@@ -37,19 +40,31 @@ public class ElevatorControl {
         buttonsPressed = new boolean[floorCount][2];
     }
     
+    /**
+     * Returns the current system tick.
+     * @return int - current system tick
+     */
     public static int getTick(){
         return tick;
     }
     
+    /**
+     * fills the is buttonsPressed array with all the floors that are occupied
+     */
     private void getButtonsPressed(){
         for(int i = 0; i<floorCount; i++){
             buttonsPressed[i][0] = floorArray[i].isUpPressed();
             buttonsPressed[i][1] = floorArray[i].isDownPressed();
         }
     }
-    
-    //trying this in a seperate method for now
-    public void populateFloors(int passengerRate, int maxPerFloor){
+
+    /**
+     * Populates floors based on user or system input, the algorithm attempts to create a person for each floor
+     * maxPerFloor number of times, with passengerRate percent chance of success at creating a passenger.
+     * @param passengerRate - an integer between 1 and 100, the percent chance that a passenger will be created.
+     * @param maxPerFloor - an integer for the max people that can be created in one tick.
+     */
+        public void populateFloors(int passengerRate, int maxPerFloor){
         int temp;
         for(int i = 0; i< floorCount; i++) 
                 for(int j=0; j<maxPerFloor; j++){
@@ -67,6 +82,14 @@ public class ElevatorControl {
                 }//This ends populating the floors with new passengers
     }
     
+    /**
+     * Runs a simple elevator control program that simply starts at the bottom 
+     * and stops at each floor on the way up and switches direction at the top
+     * floor and the bottom floor.
+     * @param passengerRate - an integer between 1 and 100, the percent chance that a passenger will be created.
+     * @param maxPerFloor - an integer for the max people that can be created in one tick.
+     * @param duration - how many many ticks the program will run for. 
+     */
     public void RunSimple(int passengerRate, int maxPerFloor, int duration){
         int currentFloor;
       
@@ -84,10 +107,6 @@ public class ElevatorControl {
             //elevator.letIn(currentFloor, Direction.UP)
             
         }//This is where the tick loop ends
-        
-
-        
-        
     }
     
     
