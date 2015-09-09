@@ -37,7 +37,7 @@ public class Person implements Comparable{
     }
 
     /**
-     * Constructor for coping a person
+     * Constructor for coping a person Tested and Proven.
      * @param o the Person to be copied
      */
     public Person(Person o){
@@ -45,7 +45,7 @@ public class Person implements Comparable{
     }
 
     /**
-     * Retrieves the floor the person wants to get off on.
+     * Retrieves the floor the person wants to get off on. Tested and Proven.
      * @return int
      */
     public int getFloor(){
@@ -53,14 +53,14 @@ public class Person implements Comparable{
     }
 
     /**
-     * Sets the Floor number the person will travel to.
+     * Sets the Floor number the person will travel to. Tested and proven.
      * @param floor the int for the floor the person would like to get off on
      */
     public void setFloor(int floor){
         this.floor=floor;
     }
     
-    
+    //Tested and Proven
     @Override
     public int compareTo(Object o) {
         if(((Person)o).floor < this.floor)
@@ -70,7 +70,7 @@ public class Person implements Comparable{
         return 0;
     }
     
-    /**
+    /**TODO: Implement and test
      * Sends a "this" person to Report.java to be added to bufferQueue 
      * and eventually added to the output file.
      */
@@ -79,6 +79,7 @@ public class Person implements Comparable{
         Report.addToReport(this);
     }
     
+    //Tested and proven
     @Override
     public String toString(){
         return floor+", "+inTick +", " + outTick;

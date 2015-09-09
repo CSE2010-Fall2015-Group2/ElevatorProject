@@ -80,6 +80,8 @@ public class ElevatorControl {
     }
     
     /**
+     * TODO: IMPLEMENT
+     * 
      * Runs a simple elevator control program that simply starts at the bottom 
      * and stops at each floor on the way up and switches direction at the top
      * floor and the bottom floor.
@@ -89,7 +91,7 @@ public class ElevatorControl {
      */
     public void RunSimple(int passengerRate, int maxPerFloor, int duration){
         int currentFloor;
-      
+        
         for(;tick<duration;tick++){
             populateFloors(passengerRate, maxPerFloor);
             
@@ -106,6 +108,8 @@ public class ElevatorControl {
             elevator.letOut(currentFloor);
             
             elevator.letIn(floorArray[currentFloor].retrieve());
+            
+            
             
         }//This is where the tick loop ends
     }

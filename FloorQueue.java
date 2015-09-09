@@ -1,5 +1,6 @@
 package ElevatorProject;
 
+
 import java.util.ArrayDeque;
 
 /** 
@@ -12,7 +13,7 @@ public class FloorQueue {
     int floor;
     
     /**
-     * constructor for the FloorQueue
+     * Constructor for the FloorQueue. Tested and proven!
      * @param floor int the floor number this floor queue represents
      * @throws InvalidLocationException in the case that supplied int is an invalid floor number.
      */
@@ -29,6 +30,7 @@ public class FloorQueue {
     
     /**
      * Returns true if the sub queue for direction d is empty false other wise.
+     * Tested and Proven!
      * @param d Direction 
      * @return boolean true if sub queue is empty false otherwise.
      */
@@ -52,7 +54,7 @@ public class FloorQueue {
     }
     
     /**
-     * If there are any passengers in upQueue return true, false otherwise.
+     * If there are any passengers in upQueue return true, false otherwise. Tested and Proven!
      * @return true if upQueue is not empty, false otherwise
      */
     public boolean isUpPressed(){
@@ -60,7 +62,7 @@ public class FloorQueue {
     }
     
     /**
-     * If there are any passengers in upQueue return true, false otherwise.
+     * If there are any passengers in upQueue return true, false otherwise. Tested and Proven
      * @return true if downQueue is not empty, false otherwise
      */
     public  boolean isDownPressed(){
@@ -69,8 +71,7 @@ public class FloorQueue {
    
     
     /**
-     * TODO: Implement !!!!
-     * adds a person to this floorQueue and sorts them into appropriate 
+     * Adds a person to this floorQueue and sorts them into appropriate. Tested and Proven!
      * @param p the person to be added to this floor
      * @param d the difference between the floor created on and the destination floor (-)down (+)up can't be 0
      * @throws InvalidLocationException in the case that destination floor is the current floor.
@@ -81,14 +82,15 @@ public class FloorQueue {
             throw new InvalidLocationException("The destination for a person "
                     + "can't be the same as the origin floor");
         }else if(d>0){
-            
+            upQueue.addLast(p);
         }else{
-            
+            downQueue.addLast(p);
         }        
     }
     
     /**
-     * returns and removes a person on this floor looking to travel in Direction d
+     * Returns and moves a person on this floor looking to travel in Direction d.
+     * Tested and Proven!
      * @param d - the direction that the elevator is traveling 
      * @return Person
      * @throws EmptyQueueException thrown when trying to remove a person from an empty queue
