@@ -150,7 +150,7 @@ public class Elevator {
         public int letOut(int floor){
         int count = 0;
         for(int i = 0; i<capacity; i++)
-            if(occupants[i].getDestination() == floor){
+            if(occupants[i].getDestinationFloor() == floor){
                 occupants[i].report();
                 removePerson(i);
                 occupancy--;
