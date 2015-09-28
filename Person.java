@@ -18,13 +18,39 @@ package ElevatorProject;
 //Can each of these report their own statistics to a file?
 
 public class Person implements Comparable{
-    private int floor;
-    private int inTick;
-    private int outTick;
+    private int destination;
+    private int inTime;
+    private int outTime;
+    private int source;
+
+    public void setInTime(int inTime) {
+        this.inTime = inTime;
+    }
+
+    public void setOutTime(int outTime) {
+        this.outTime = outTime;
+    }
+
+    public void setSource(int source) {
+        this.source = source;
+    }
+
+    public int getInTime() {
+        return inTime;
+    }
+
+    public int getOutTime() {
+        return outTime;
+    }
+
+    public int getSource() {
+        return source;
+    }
+    
 
     /**
      * Creates a Person 
-     * @param floor the destination floor for the Person 
+     * @param floor the destination destination for the Person 
      * @param inTick 
      * @throws ElevatorProject.InvalidLocationException 
      */
@@ -32,8 +58,8 @@ public class Person implements Comparable{
         if(floor <=0)
             throw new InvalidLocationException();
 
-        this.floor=floor;
-        this.inTick = inTick; 
+        this.destination=floor;
+        this.inTime = inTick; 
     }
 
     /**
@@ -41,31 +67,31 @@ public class Person implements Comparable{
      * @param o the Person to be copied
      */
     public Person(Person o){
-        floor=o.getFloor();
+        destination=o.getDestination();
     }
 
     /**
-     * Retrieves the floor the person wants to get off on. Tested and Proven.
+     * Retrieves the destination the person wants to get off on. Tested and Proven.
      * @return int
      */
-    public int getFloor(){
-        return floor;
+    public int getDestination(){
+        return destination;
     }
 
     /**
      * Sets the Floor number the person will travel to. Tested and proven.
-     * @param floor the int for the floor the person would like to get off on
+     * @param destination the int for the destination the person would like to get off on
      */
-    public void setFloor(int floor){
-        this.floor=floor;
+    public void setDestination(int destination){
+        this.destination=destination;
     }
     
     //Tested and Proven
     @Override
     public int compareTo(Object o) {
-        if(((Person)o).floor < this.floor)
+        if(((Person)o).destination < this.destination)
             return 1;
-        if(((Person)o).floor > this.floor)
+        if(((Person)o).destination > this.destination)
             return -1;
         return 0;
     }
@@ -75,13 +101,13 @@ public class Person implements Comparable{
      * and eventually added to the output file.
      */
     public void report(){
-        outTick = ElevatorControl.getTick();
+        outTime = ElevatorControl.getTick();
         Report.addToReport(this);
     }
     
     //Tested and proven
     @Override
     public String toString(){
-        return floor+", "+inTick +", " + outTick;
+        return destination+", "+inTime +", " + outTime;
     }
 }

@@ -24,12 +24,12 @@ public class Driver {
             
             System.out.println(test1);
             System.out.println(test2);
-            System.out.println(test1.getFloor());
-            System.out.println(test2.getFloor());
+            System.out.println(test1.getDestination());
+            System.out.println(test2.getDestination());
             System.out.println(test1.compareTo(test2));
             System.out.println(test2.compareTo(test1));
             
-            test2.setFloor(3);
+            test2.setDestination(3);
             System.out.println(test1.compareTo(test2));
             
             System.out.println("***********");
